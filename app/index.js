@@ -9,6 +9,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
+
+    // knows to listen for requests from Localhost: 5000
     app.listen(5000, () => {
         console.log("localhost is 5000");
     });
