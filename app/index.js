@@ -2,6 +2,7 @@ var mongoose    = require('mongoose');
 var express     = require('express');
 
 var app         = express();
+var User        = require('./schemas/user')
 
 mongoose.connect('mongodb://admin:12345@ds121099.mlab.com:21099/njs-mdb')
 
