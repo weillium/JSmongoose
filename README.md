@@ -9,6 +9,7 @@ Dependencies to install:
 - mongodb (MongoDB driver for NodeJS)
 - mongoose (MongoDB object modeling tool)
 - nodemon (monitor script for use during development)
+- passport-local (authentication with different methods)
 
 Goals:
 - Create a Register and Login sequence
