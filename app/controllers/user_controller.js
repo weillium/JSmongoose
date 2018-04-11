@@ -40,7 +40,6 @@ exports.login = (req, res) => {
             message: "please fill out all fields"
         });
     }
-
     User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
@@ -53,7 +52,7 @@ exports.login = (req, res) => {
         .then(result => {
             if (result === true) {
                 req.session.userId = user._id;
-                res.send(user);
+                res.send("welcome " + user.email);
             } else {
                 res.status(401).send({
                     message: "wrong email or password"
@@ -68,5 +67,22 @@ exports.login = (req, res) => {
             message: "error on login"
         });
     });
+}
 
+// access user profile
+exports.profile = (req, res) => {
+    User.findById(req.session.userId)
+    .then(user => {
+        if (user === null)  {
+            res.status(400).send({
+                message: 'not authorized'
+            });
+        } else {
+            res.send('Your Profile: ' + user.email + user.password);
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: "error accessing profile"
+        });
+    });
 }
