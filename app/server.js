@@ -18,10 +18,12 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
     app.get('/', (req, res) => {
-        res.json({"message": "TEST TEST TEST"});
+        res.json({"message": "HELLO WORLD"});
     });
 
+    require('./routes/user_routes')(app);
     require('./routes/resume_routes')(app);
+
 
     // knows to listen for requests from Localhost: 5000
     app.listen(5000, () => {

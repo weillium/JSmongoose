@@ -15,7 +15,7 @@ exports.create = (req, res) => {
         });
     }
 
-    const resume = new Resume({
+    var resume = new Resume({
         title: req.body.title,
         content: req.body.content,
         email: req.body.email
