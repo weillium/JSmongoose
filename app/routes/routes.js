@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
     // login
     app.get('/login', function(req, res) {
         // render page
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.render('login.ejs', { message: req.flash('loginMessage') }); // flash is connect-flash way for getting flashdata in session
     });
 
     // signup

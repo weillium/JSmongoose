@@ -36,6 +36,9 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
+    app.get('/', (req, res) => {
+        res.json({"message": "TEST TEST TEST"});
+    });
 
     // require('./config/passport')(passport); // pass passport for configuration
     require('./routes/routes')(app, passport); // load routes and pass in app + passport
