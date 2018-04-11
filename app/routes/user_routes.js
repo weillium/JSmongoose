@@ -11,7 +11,7 @@ module.exports = (app) => {
     app.get('/profile', users.profile);
 
     // user logout
-    //app.get('/logout', users.logout);
+    app.get('/logout', users.logout);
 
     /*function isLoggedIn(req, res, next) {
         // check if authenticated

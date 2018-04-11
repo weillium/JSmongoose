@@ -86,3 +86,19 @@ exports.profile = (req, res) => {
         });
     });
 }
+
+// logout a user
+exports.logout = (req, res) => {
+    if (req.session) {
+        // delete session object
+        req.session.destroy(function (err) {
+          if (err) {
+            res.status(500).send({
+                message: "error on logout"
+            });
+          } else {
+            res.redirect('/');
+          }
+        });
+    }
+}
