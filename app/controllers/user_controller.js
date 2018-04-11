@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     // save user data to database
     newUser.save()
     .then(data => {
-        res.send(data);
+        res.redirect('/profile');
     }).catch(err => {
         res.status(500).send({
             message: err.message || "error occurred on registration"
@@ -52,7 +52,7 @@ exports.login = (req, res) => {
         .then(result => {
             if (result === true) {
                 req.session.userId = user._id;
-                res.send("welcome " + user.email);
+                res.redirect('/profile');
             } else {
                 res.status(401).send({
                     message: "wrong email or password"
@@ -75,10 +75,10 @@ exports.profile = (req, res) => {
     .then(user => {
         if (user === null)  {
             res.status(400).send({
-                message: 'not authorized'
+                message: "not authorized"
             });
         } else {
-            res.send('Your Profile: ' + user.email + user.password);
+            res.send("Welcome to Your Profile, " + user.email);
         }
     }).catch(err => {
         res.status(500).send({
