@@ -17,22 +17,9 @@ var UserSchema = mongoose.Schema({
 });
 
 // define function for authenticating a user
-UserSchema.statics.authenticate = function (password, userPassword, user) {
-    bcrypt.compare(password, user.password)
-    .then(result => {
-        if(result === false) {
-            return new Errorstatus(401).send({
-                message: "wrong email or password"
-            })
-        } else {
-            return user;
-        }
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "an error occurred on authentication"
-        });
-    });
-}
+UserSchema.statics.authenticate = function (password, userPassword) {
+    return bcrypt.compare(password, userPassword);
+};
 
 // this is done before the user model is created
 UserSchema.pre('save', function (next) {

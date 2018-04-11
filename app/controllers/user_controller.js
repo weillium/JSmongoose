@@ -36,31 +36,37 @@ exports.create = (req, res) => {
 // login a user
 exports.login = (req, res) => {
     if (!req.body.email || !req.body.password) {
-        return res.status(400).send({
+        res.status(400).send({
             message: "please fill out all fields"
         });
     }
 
     User.findOne({ email: req.body.email })
     .then(user => {
-        if(!user) {
-            return res.status(404).send({
-                message: "user not found with email" + req.body.email
-            })
-        }
-        User.authenticate(req.body.password, user.password, user)
-        .then(user => {
-            req.session.userId = user._id;
-            res.send(user);
-            // return res.redirect('/profile');
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "an error occurred on login"
+        if (!user) {
+            res.status(404).send({
+                message: "user not found"
             });
+        }
+
+        User.authenticate(req.body.password, user.password)
+        .then(result => {
+            if (result === true) {
+                req.session.userId = user._id;
+                res.send(user);
+            } else {
+                res.status(401).send({
+                    message: "wrong email or password"
+                });
+            }
+        }).catch(err => {
+            console.log(err);
         });
+
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "an error occurred while finding user"
+            message: "error on login"
         });
     });
+
 }
