@@ -13,4 +13,9 @@ module.exports = (app) => {
     app.get('/register', function(err, res) {
         res.render('register.ejs');
     });
+
+    // render create resume page
+    app.get('/resumes/new', function(err, res) {
+        res.render('resumeNew.ejs');
+    });
 }

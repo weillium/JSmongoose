@@ -79,8 +79,9 @@ exports.profile = (req, res) => {
                 message: "not authorized"
             });
         } else {
+            req.session.user = user;
             res.render("profile.ejs", {
-                user : user // get user out of session and pass to template
+                user: user // get user out of session and pass to template
             });
         }
     }).catch(err => {

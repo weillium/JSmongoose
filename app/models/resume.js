@@ -10,9 +10,9 @@ var ResumeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    userId: {
         type: String,
-        required: true
+        default: 0
     }
 }, {
     timestamps: true

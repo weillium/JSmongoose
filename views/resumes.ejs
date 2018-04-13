@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>User Resumes</title>
+</head>
+<body>
+    <h1>Your Resumes</h1>
+    <p><%= user.email %></p>
+
+    <a href="/resumes/new" class="btn btn-default">Create a Resume</a>
+
+    <div class="resumelist">
+        <p><strong>Title:</strong> <%= resumes.title %></p>
+        <p><%= resumes.content %></p>
+    </div>
+
+    <a href="/profile" class="btn btn-default">Back to Your Profile</a>
+</body>
+</html>

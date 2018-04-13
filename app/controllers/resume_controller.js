@@ -15,15 +15,21 @@ exports.create = (req, res) => {
         });
     }
 
+    if (!req.session) {
+        return res.status(401).send({
+            message: "please login first"
+        });
+    }
+
     var resume = new Resume({
         title: req.body.title,
         content: req.body.content,
-        email: req.body.email
+        userId: req.session.userId
     });
 
     resume.save()
     .then(data => {
-        res.send(data);
+        res.redirect('/resumes');
     }).catch(err => {
         res.status(500).send({
             message: err.message || "an error occurred on creation"
@@ -35,7 +41,10 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Resume.find()
     .then(resumes => {
-        res.send(resumes);
+        res.render("resumes.ejs", {
+            resumes: resumes,
+            user: req.session.user
+        });
     }).catch(err => {
         res.status(500).send({
             message: err.message || "an error occurred on retrieval"
