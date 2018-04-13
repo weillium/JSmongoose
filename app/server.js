@@ -26,10 +26,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
-    app.get('/', (req, res) => {
-        res.json({"message": "HELLO WORLD"});
-    });
 
+    require('./routes/routes')(app);
     require('./routes/user_routes')(app);
     require('./routes/resume_routes')(app);
 

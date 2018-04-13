@@ -25,6 +25,7 @@ exports.create = (req, res) => {
     // save user data to database
     newUser.save()
     .then(data => {
+        req.session.userId = data._id;
         res.redirect('/profile');
     }).catch(err => {
         res.status(500).send({
@@ -78,7 +79,9 @@ exports.profile = (req, res) => {
                 message: "not authorized"
             });
         } else {
-            res.send("Welcome to Your Profile, " + user.email);
+            res.render("profile.ejs", {
+                user : user // get user out of session and pass to template
+            });
         }
     }).catch(err => {
         res.status(500).send({
