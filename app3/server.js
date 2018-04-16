@@ -4,6 +4,7 @@ var bodyParser      = require('body-parser');
 var session         = require('express-session');
 
 var database        = require('./config/database');
+var userRoutes      = require('./routes/resume_routes');
 
 var app             = express();
 mongoose.Promise    = global.Promise
@@ -28,6 +29,8 @@ db.once('open', function() {
 
     require('./routes/routes')(app);
     require('./routes/user_routes')(app);
+    require('./routes/resume_routes')(app);
+
 
     // knows to listen for requests from Localhost: 5000
     app.listen(5000, () => {

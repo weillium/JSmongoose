@@ -4,8 +4,23 @@ module.exports = (app) => {
     // user register
     app.post('/register', users.create);
 
+    // render user registration page
+    app.get('/register', function (err, res) {
+        if (!req.session) {
+            res.render('register.ejs');
+        }
+    });
+
     // user login
     app.post('/login', users.login);
+
+    // render user login page
+    app.get('/login', function (err, res) {
+        res.render('login.ejs', {
+            message: req.session.message,
+            error: req.session.error
+        })
+    });
 
     // user profile
     app.get('/profile', users.profile);
@@ -13,12 +28,4 @@ module.exports = (app) => {
     // user logout
     app.get('/logout', users.logout);
 
-    /*function isLoggedIn(req, res, next) {
-        // check if authenticated
-        if (req.isAuthenticated())
-            return next();
-        
-            // redirect to homepage
-            res.redirect('/');
-    }*/
 }

@@ -1,16 +1,10 @@
 module.exports = (app) => {
-    // render index page
-    app.get('/', function(err, res) {
-        res.render('index.ejs');
-    });
-
-    // render login page
-    app.get('/login', function(err, res) {
-        res.render('login.ejs');
-    });
-
-    // render registration page
-    app.get('/register', function(err, res) {
-        res.render('register.ejs');
-    });
-}
+    // index
+    app.get('/', function (err, res) {
+        res.render('index.ejs', {
+            user: req.session.user,
+            message: req.session.message,
+            error: req.session.error
+        })
+    })
+};
