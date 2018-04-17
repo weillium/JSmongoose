@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <h2><%= session.message %></h2>
+    <p>Welcome to your profile, <%= user.email %>.</p>
+    <p><%= session.resumes %></p>
+    <a href="/resume/new" class="btn btn-default">New Resume</a>
+</body>
+</html>

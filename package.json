@@ -1,5 +1,5 @@
 {
-  "name": "jsmongoose",
+  "name": "JSmongoose",
   "version": "1.0.0",
   "description": "NodeJS Mongoose Test",
   "main": "index.js",

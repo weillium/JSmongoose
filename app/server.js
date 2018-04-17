@@ -2,11 +2,14 @@ var mongoose        = require('mongoose');
 var express         = require('express');
 var bodyParser      = require('body-parser');
 var session         = require('express-session');
+var path            = require('path');
 
 var database        = require('./config/database');
 
 var app             = express();
 mongoose.Promise    = global.Promise
+
+app.use(express.static('public'));
 
 // run middlewares with access to request and response objects
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,9 +28,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
-
     require('./routes/routes')(app);
-    require('./routes/user_routes')(app);
 
     // knows to listen for requests from Localhost: 5000
     app.listen(5000, () => {
