@@ -64,4 +64,24 @@ module.exports = (app) => {
 
     // handle resume creation POST request
     app.post('/resume/new', resumes.new);
+
+    // handle resume details GET request
+    app.get('/resume/:resumeId', resumes.details);
+
+    // handle resume editing GET request
+    app.get('/resume/edit/:resumeId', function (req, res) {
+        if (req.session.user) {
+            res.render('editResume.ejs', {
+                resumeId: req.params.resumeId,
+                session: req.session
+            });
+        } else {
+            req.session.message = "not authorized";
+            req.session.error = 500;
+            res.redirect('/');
+        }
+    });
+
+    // handle resume editing PUT request
+    app.put('/resume/edit/:resumeId', resumes.edit);
 };

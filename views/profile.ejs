@@ -5,9 +5,33 @@
 </head>
 <body>
     <h1>Profile</h1>
-    <h2><%= session.message %></h2>
+    <p><%= session.message %></p>
     <p>Welcome to your profile, <%= user.email %>.</p>
-    <p><%= session.resumes %></p>
-    <a href="/resume/new" class="btn btn-default">New Resume</a>
+    
+    <h2>Your Resumes</h2>
+    <ul>
+        <% for (var i=0; i < resumes.length; i++) { %>
+            <li>
+                <%= resumes[i]._id %>
+            </li>
+            <li class="title">
+                Title: <%= resumes[i].title %> 
+            </li>
+            <li class="content">
+                Content: <%= resumes[i].content %>
+            </li>
+            <li class="params">
+                Created At: <%= resumes[i].createdAt %> | Updated At: <%= resumes[i].updatedAt %>
+            </li>
+            <li>
+                <a href="/resume/<%= resumes[i]._id %>">Details</a>
+                <a href="/resume/edit/<%= resumes[i]._id %>">Edit</a>
+                -----------
+            </li>
+        <% } %>
+    </ul>
+
+    <a href="/resume/new">New Resume</a>
+
 </body>
 </html>

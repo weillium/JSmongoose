@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Resume Details</title>
+</head>
+<body>
+    <h1>Resume Details</h1>
+    <p><%= session.message %></p>
+    
+    <ul>
+            <li>
+                <%= resume._id %>
+            </li>
+            <li class="title">
+                Title: <%= resume.title %> 
+            </li>
+            <li class="content">
+                Content: <%= resume.content %>
+            </li>
+            <li class="params">
+                Created At: <%= resume.createdAt %> | Updated At: <%= resume.updatedAt %>
+            </li>
+            <li>
+                <a href="/resume/edit/<%= resume._id %>">Edit</a>
+                -----------
+            </li>
+    </ul>
+
+</body>
+</html>

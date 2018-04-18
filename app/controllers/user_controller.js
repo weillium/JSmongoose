@@ -72,28 +72,37 @@ exports.login = (req, res) => {
 // access user profile
 exports.profile = (req, res) => {
     user = req.session.user;
+    email = req.session.user.email;
+
     if (user === null) {
         req.session.message = "not authorized";
         req.session.error = 400;
         res.redirect('/');
     } else {
 
-        // find all resumes tagged with user_id
-        Resume.find()
+        // find all resumes tagged with email
+        Resume.find({email: email })
         .then(resumes => {
+
+            // check if there are any resumes tagged with this email
             if(!resumes) {
                 req.session.message = "no resumes found";
                 req.session.error = 404;
+                resumes = {};
+            } else {
+                req.session.message = "resumes found";
+                resumes = resumes;
             }
-            req.session.resumes = resumes;
+
+            res.render("profile.ejs", {
+                user: user,
+                resumes: resumes,
+                session: req.session
+            });
+
         }).catch(err => {
             req.session.message = "error occurred on resume retrieval";
             req.session.error = 500;
-        });
-
-        res.render("profile.ejs", {
-            user: user,
-            session: req.session
         });
     }
 };
