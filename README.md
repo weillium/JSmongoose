@@ -7,6 +7,7 @@ Dependencies to install:
 - express (minimalist web framework for NodeJS)
 - express-session (session middleware for Express)
 - ejs (simple templating language for generating HTML markup using plain JavaScript)
+- method-override (used to allow PUT and DELETE methods in html)
 - mongodb (MongoDB driver for NodeJS)
 - mongoose (MongoDB object modeling tool)
 - nodemon (monitor script for use during development)

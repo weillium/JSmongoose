@@ -4,6 +4,11 @@
     <title>Resume Details</title>
 </head>
 <body>
+    <ul class="navBar">
+        <li><a href = "/profile">Profile</a></li>
+        <li><a href = "/logout">Logout</a></li>
+    </ul>
+    
     <h1>Resume Details</h1>
     <p><%= session.message %></p>
     
@@ -22,6 +27,9 @@
             </li>
             <li>
                 <a href="/resume/edit/<%= resume._id %>">Edit</a>
+                <form action="/resume/delete/<%= resume._id %>?_method=DELETE" method="post">
+                    <button type="submit">Delete</button>
+                </form>
                 -----------
             </li>
     </ul>

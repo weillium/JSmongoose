@@ -51,7 +51,6 @@ exports.details = (req, res) => {
 exports.edit = (req, res) => {
     var title = '';
     var content = '';
-    req.session.message = "init";
 
     // check if there's a need to query original resume
     if (!req.body.title || !req.body.content) {
@@ -81,7 +80,7 @@ exports.edit = (req, res) => {
     }
 
     // update resume with this resumeId
-    Resume.findByIdAndUpdate(req.params.ResumeId, {
+    Resume.findByIdAndUpdate(req.params.resumeId, {
         title: title,
         content: content
     }, {new: true})
@@ -97,3 +96,25 @@ exports.edit = (req, res) => {
         res.redirect('/profile');
     });
 };
+
+exports.delete = (req, res) => {
+    Resume.findByIdAndRemove(req.params.resumeId)
+    .then(resume => {
+        if (!resume) {
+            req.session.message = "resume not found";
+            req.session.error = 404;
+        } else {
+            req.session.message = "resume deleted";
+        }
+        res.redirect('/profile');
+    }).catch(err => {
+        if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+            req.session.message = "resume not found";
+            req.session.error = 404;
+        } else {
+            req.session.message = "error occurred on delete"
+            req.session.error = 500;
+        }
+        res.redirect('/profile');
+    })
+}

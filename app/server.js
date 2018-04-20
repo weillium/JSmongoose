@@ -3,6 +3,7 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var session         = require('express-session');
 var path            = require('path');
+var methodOverride  = require('method-override');
 
 var database        = require('./config/database');
 
@@ -28,6 +29,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // what to do once we've been connected
+    app.use(methodOverride('_method'));
     require('./routes/routes')(app);
 
     // knows to listen for requests from Localhost: 5000

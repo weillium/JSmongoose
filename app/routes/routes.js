@@ -84,4 +84,7 @@ module.exports = (app) => {
 
     // handle resume editing PUT request
     app.put('/resume/edit/:resumeId', resumes.edit);
+
+    // handle resume delete GET request
+    app.delete('/resume/delete/:resumeId', resumes.delete);
 };

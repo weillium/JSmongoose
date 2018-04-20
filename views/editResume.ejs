@@ -4,12 +4,17 @@
     <title>Edit Resume</title>
 </head>
 <body>
+    <ul class="navBar">
+        <li><a href = "/profile">Profile</a></li>
+        <li><a href = "/logout">Logout</a></li>
+    </ul>
+
     <h1>Edit Resume</h1>
     <h2><%= session.message %></h2>
 
     <h1><%= session.user.email %></h1>
 
-    <form action="/resume/edit/<%= resumeId %>" method="put">
+    <form action="/resume/edit/<%= resumeId %>?_method=PUT" method="post">
         <div class="form-group">
             <label>Title</label>
             <input type="text" class="form-control" name="title">
@@ -19,7 +24,7 @@
             <input type="text" class="form-control" name="content">
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Edit</button>
+        <button type="submit">Edit</button>
     </form>
 </body>
 </html>
